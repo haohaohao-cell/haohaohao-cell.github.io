@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>郝仁昱 · 作品集</title>
+<meta name="description" content="郝仁昱的作品集：界面实现、数据可视化与前端工程。ACE 应用工坊、摄影助手、GOAT Atlas、SpectrumFog、PYTHIA。">
+<meta name="theme-color" content="#faf9f7">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◐</text></svg>">
+<style>
+:root{
+  --bg:#faf9f7;
+  --surface:#ffffff;
+  --ink:#18181b;
+  --muted:#71717a;
+  --faint:#a1a1aa;
+  --line:#e7e5e1;
+  --accent:#18181b;
+  --radius:18px;
+  --maxw:1120px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:600}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(250,249,247,.78);
+  border-bottom:1px solid transparent;transition:border-color .3s
+}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{font-weight:700;letter-spacing:.02em}
+.brand span{color:var(--faint);font-weight:500;margin-left:10px;font-size:13px}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav a{position:relative;padding:4px 0;transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--ink);transition:width .25s var(--ease)}
+.nav a:hover::after{width:100%}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 40px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:88px 88px;opacity:.35;
+  mask-image:radial-gradient(ellipse 70% 60% at 30% 30%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 30% 30%,#000 20%,transparent 75%);
+}
+.hero .wrap{position:relative}
+.hero h1{
+  font-size:clamp(44px,8vw,84px);line-height:1.02;margin:18px 0 0;
+  letter-spacing:-.02em;font-weight:800
+}
+.hero .lead{
+  margin:26px 0 0;font-size:clamp(17px,2.2vw,21px);line-height:1.7;
+  max-width:24em;color:#3f3f46
+}
+.hero .lead strong{color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;font-size:14px;color:var(--muted)}
+.meta span{display:inline-flex;align-items:center;gap:8px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--faint);display:inline-block}
+.actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:999px;
+  font-size:14px;font-weight:600;border:1px solid var(--ink);background:var(--ink);color:#fff;
+  transition:transform .25s var(--ease),opacity .2s
+}
+.btn:hover{transform:translateY(-2px);opacity:.92}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+
+/* ---------- section ---------- */
+section{padding:56px 0;scroll-margin-top:78px}
+.project{scroll-margin-top:78px}
+.section-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.section-head h2{font-size:clamp(24px,3.4vw,34px);line-height:1.2;margin:0;letter-spacing:-.01em}
+.section-head p{margin:0;color:var(--muted);font-size:15px}
+
+/* ---------- index cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 22px 20px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;
+  display:flex;flex-direction:column;gap:6px
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(24,24,27,.35);border-color:#d6d3cd}
+.card .idx{font-size:12px;color:var(--faint);font-weight:700;letter-spacing:.1em}
+.card h3{margin:2px 0 0;font-size:17px}
+.card p{margin:0;font-size:14px;color:var(--muted);line-height:1.6}
+.card .stack{margin-top:auto;padding-top:14px;font-size:12px;color:var(--faint)}
+
+/* ---------- project block ---------- */
+.project{padding:64px 0;border-top:1px solid var(--line)}
+.project:first-of-type{border-top:none}
+.p-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin-bottom:8px}
+.p-head h2{font-size:clamp(26px,3.8vw,40px);margin:6px 0 0;letter-spacing:-.015em;line-height:1.15}
+.p-head .tag{font-size:13px;color:var(--faint);white-space:nowrap}
+.p-sub{margin:10px 0 0;color:var(--muted);font-size:16px;max-width:40em}
+.p-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:12px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:#fff}
+
+.shot{
+  margin-top:28px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  background:#fff;box-shadow:0 30px 60px -40px rgba(24,24,27,.45);cursor:zoom-in;
+  transition:transform .4s var(--ease)
+}
+.shot:hover{transform:translateY(-3px)}
+.shot img{width:100%}
+.shot.tight{max-width:760px;margin-left:auto;margin-right:auto}
+.shots-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.shots-2 .shot{margin-top:0}
+.cap{margin:10px 0 0;font-size:12.5px;color:var(--faint);text-align:center}
+
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:10px 34px;margin-top:26px}
+.notes div{display:flex;gap:12px;font-size:15px;line-height:1.7}
+.notes b{font-weight:600;white-space:nowrap}
+.notes i{font-style:normal;color:var(--faint);line-height:1.9}
+.quote{
+  margin:34px 0 0;padding:6px 0 6px 20px;border-left:2px solid var(--ink);
+  font-size:clamp(16px,2vw,19px);color:#3f3f46;line-height:1.7
+}
+
+/* ---------- more ---------- */
+.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.more .card h3{font-size:16px}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+.about ul{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.about li{display:flex;gap:12px;font-size:15px;line-height:1.7}
+.about li::before{content:"—";color:var(--faint)}
+.contact-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px
+}
+.contact-card dl{margin:0;display:grid;gap:14px}
+.contact-card dt{font-size:12px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase}
+.contact-card dd{margin:4px 0 0;font-size:15px}
+.contact-card a{border-bottom:1px solid var(--line);transition:border-color .2s}
+.contact-card a:hover{border-color:var(--ink)}
+
+footer{border-top:1px solid var(--line);padding:34px 0 54px;color:var(--faint);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(18px)}
+.js .reveal{transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:4vmin;background:rgba(12,12,14,.92)}
+.lb.on{display:grid}
+.lb img{max-width:100%;max-height:92vh;border-radius:10px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.lb .close{position:absolute;top:18px;right:22px;color:#fff;font-size:30px;line-height:1;opacity:.75;cursor:pointer;background:none;border:0}
+.lb .close:hover{opacity:1}
+
+@media (max-width:860px){
+  .wrap{padding:0 20px;width:100%}
+  .section-head{display:block}
+  .section-head p{margin-top:6px;max-width:none}
+  .cards{grid-template-columns:1fr}
+  .hero .lead{max-width:none}
+  .hero{padding:64px 0 24px}
+  .nav ul{display:none}
+  .notes,.about,.shots-2{grid-template-columns:1fr}
+  .p-head{grid-template-columns:1fr}
+  .p-head .tag{order:-1}
+  section{padding:36px 0}
+  .project{padding:44px 0}
+}
+@media print{
+  .js .reveal{opacity:1!important;transform:none!important}
+  .nav{position:static}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">郝仁昱<span>UI / 前端</span></a>
+    <ul>
+      <li><a href="#work">作品</a></li>
+      <li><a href="#workshop">界面</a></li>
+      <li><a href="#more">项目</a></li>
+      <li><a href="#about">关于</a></li>
+      <li><a href="https://github.com/haohaohao-cell" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Portfolio · 2026</div>
+      <h1>郝仁昱</h1>
+      <p class="lead">界面要处理的，是把一个算得很复杂的结果，<strong>变成一眼能看懂、顺手能操作的东西。</strong></p>
+      <div class="meta">
+        <span>北京邮电大学 · 物联网工程 · 大三在读</span>
+        <span><i class="dot"></i>北京 / 上海</span>
+        <span><i class="dot"></i>可实习 6 个月以上</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#work">看作品</a>
+        <a class="btn ghost" href="https://github.com/haohaohao-cell" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- index -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>五个能打开的界面</h2>
+        <p>从平台工坊到拍摄助手，从暗色图鉴到交互式仿真 —— 每页都写了我实际实现的那部分。</p>
+      </div>
+      <div class="cards">
+        <a class="card reveal" href="#workshop">
+          <div class="idx">01</div>
+          <h3>ACE · 应用工坊</h3>
+          <p>平台首页：品牌区 → 应用墙 → 分类与筛选。</p>
+          <div class="stack">Vue3 · Element Plus</div>
+        </a>
+        <a class="card reveal" href="#photoframer">
+          <div class="idx">02</div>
+          <h3>ACE · 摄影助手</h3>
+          <p>产品落地页：首屏、三步流程、能力卡、示例引导。</p>
+          <div class="stack">Vue3 · 组件化 · 图标体系</div>
+        </a>
+        <a class="card reveal" href="#goat">
+          <div class="idx">03</div>
+          <h3>GOAT Atlas</h3>
+          <p>暗色编辑风：字号层级、细线网格、分享卡与 PWA。</p>
+          <div class="stack">Next.js · TypeScript</div>
+        </a>
+        <a class="card reveal" href="#spectrum">
+          <div class="idx">04</div>
+          <h3>SpectrumFog</h3>
+          <p>可交互可视化：拖动干扰机，热力图与曲线联动。</p>
+          <div class="stack">Vite · 静态部署</div>
+        </a>
+        <a class="card reveal" href="#pythia">
+          <div class="idx">05</div>
+          <h3>PYTHIA · 数据看板</h3>
+          <p>图表可读性：排行榜、校准曲线、基准线。</p>
+          <div class="stack">matplotlib · GitHub Pages</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 workshop -->
+  <section class="project" id="workshop">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="eyebrow">01 — ACE · 应用工坊</div>
+          <h2>把「美学能力」包装成 10 个可用工具</h2>
+        </div>
+        <div class="tag">2025.11 – 2026.08</div>
+      </div>
+      <p class="p-sub reveal">难点不在好看，在于让用户知道从哪开始。</p>
+      <div class="p-meta reveal">
+        <span class="chip">实验室项目</span><span class="chip">前端实现</span>
+        <span class="chip">Vue3</span><span class="chip">Element Plus</span><span class="chip">响应式</span>
+      </div>
+
+      <figure class="shot reveal" data-img="assets/workshop.webp">
+        <img src="assets/workshop.webp" width="1440" height="900" alt="ACE 应用工坊首屏" loading="lazy">
+      </figure>
+      <p class="cap">ace-aesthetics.cn/application · 品牌区、主视觉卡、筛选区与应用卡片墙</p>
+
+      <div class="notes reveal">
+        <div><b>信息分层</b><span>一屏三层：工坊是什么（标题 + 定位 + 两个入口）→ 有什么（应用墙）→ 怎么找（分类 Tab + 搜索 + 结果计数）。</span></div>
+        <div><b>卡片组件</b><span>缩略图 + 类型徽标 + 标题 + 一行说明 + 跳转箭头，10 个应用共用同一套间距与圆角。</span></div>
+        <div><b>主视觉卡</b><span>右侧带透视的取景框，先把「摄影助手」演示一遍，比文字更快说明工具在做什么。</span></div>
+        <div><b>筛选与搜索</b><span>分类 Tab 带计数，切换时列表与计数同步；搜索框占位给出示例，空结果有独立状态。</span></div>
+        <div><b>实现</b><span>Vue3 组合式 API + Element Plus，桌面 / 平板 / 移动三档断点，卡片栅格 4 列降到 1 列。</span></div>
+      </div>
+      <blockquote class="quote reveal">界面的每一层，都应该回答一个问题：我现在在哪、下一步能做什么。</blockquote>
+    </div>
+  </section>
+
+  <!-- 02 photoframer -->
+  <section class="project" id="photoframer">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="eyebrow">02 — ACE · 摄影助手</div>
+          <h2>讲清「AI 怎么帮你构图」的产品页</h2>
+        </div>
+        <div class="tag">2025.11 – 2026.08</div>
+      </div>
+      <p class="p-sub reveal">首屏讲价值，下面讲流程、能力和证据。</p>
+      <div class="p-meta reveal">
+        <span class="chip">实验室项目</span><span class="chip">前端实现</span>
+        <span class="chip">Vue3</span><span class="chip">组件化</span><span class="chip">图标体系</span>
+      </div>
+
+      <figure class="shot reveal" data-img="assets/pf-hero.webp">
+        <img src="assets/pf-hero.webp" width="1400" height="500" alt="摄影助手首屏" loading="lazy">
+      </figure>
+      <div class="shots-2">
+        <figure class="shot reveal" data-img="assets/pf-caps.webp">
+          <img src="assets/pf-caps.webp" width="1400" height="432" alt="五大核心能力卡片" loading="lazy">
+        </figure>
+        <figure class="shot reveal" data-img="assets/pf-demo.webp">
+          <img src="assets/pf-demo.webp" width="1140" height="640" alt="AI 构图分析示例" loading="lazy">
+        </figure>
+      </div>
+      <p class="cap">首屏 → 五大能力卡 → 构图示例：价值主张、能力拆解、效果证据各占一段</p>
+
+      <div class="notes reveal">
+        <div><b>三步流程</b><span>序号 + 连接线把「拍照 → 分析 → 建议」串起来，比三列文字更快被理解。</span></div>
+        <div><b>能力卡</b><span>图标按语义配色（构图紫、色彩蓝、曝光绿、评分黄、建议粉），底色取同色 8% 透明。</span></div>
+        <div><b>示例区</b><span>三张对比图带构图辅助线和「AI」标签，把抽象建议变成看得见的画面。</span></div>
+        <div><b>实现</b><span>拆成 Hero / Steps / CapabilityCard / DemoCard，文案与图标走配置，改一处不影响布局。</span></div>
+      </div>
+      <blockquote class="quote reveal">把 AI 的判断，翻译成用户能执行的下一步 —— 这是这个页面唯一的目标。</blockquote>
+    </div>
+  </section>
+
+  <!-- 03 goat -->
+  <section class="project" id="goat">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="eyebrow">03 — GOAT Atlas</div>
+          <h2>视觉即结构：用字号和留白做层级</h2>
+        </div>
+        <div class="tag">2026.10</div>
+      </div>
+      <p class="p-sub reveal">一个暗色编辑风的职业生涯图鉴：86 个名场面、78 个来源，放在同一张地图上。</p>
+      <div class="p-meta reveal">
+        <span class="chip">个人项目</span><span class="chip">设计与实现</span>
+        <span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">PWA</span>
+      </div>
+
+      <figure class="shot reveal" data-img="assets/goat.webp">
+        <img src="assets/goat.webp" width="1430" height="900" alt="GOAT Atlas 首页" loading="lazy">
+      </figure>
+      <p class="cap">haohaohao-cell.github.io/goat-atlas · 超大衬线标题 + 细线网格 + 单一金色重点色</p>
+
+      <div class="notes reveal">
+        <div><b>字号即层级</b><span>标题 72 / 副标题 14 / 正文 15 / 元信息 11，四级足够；不靠加粗，靠字号和字距拉开主次。</span></div>
+        <div><b>颜色克制</b><span>全站只有黑、米白、金三色；金色只出现在按钮和强调标签上，视线永远先落在动作上。</span></div>
+        <div><b>细节可交付</b><span>分享卡按 4:5 单独排版，OG 图 1200×630 分章节生成，PWA 图标、RSS、JSON-LD 一起配齐。</span></div>
+        <div><b>多语言</b><span>中英葡三个入口共用一套版式，英文标题的字距单独收过，避免长单词撑破栏宽。</span></div>
+      </div>
+      <blockquote class="quote reveal">风格不是装饰，是信息结构的可视化：暗色是为了让照片和数字跳出来。</blockquote>
+    </div>
+  </section>
+
+  <!-- 04 spectrum -->
+  <section class="project" id="spectrum">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="eyebrow">04 — SpectrumFog</div>
+          <h2>拖动一个干扰机，雷达覆盖就跟着塌</h2>
+        </div>
+        <div class="tag">2026.10 – 至今</div>
+      </div>
+      <p class="p-sub reveal">让用户通过「拖一下」理解一个公式。</p>
+      <div class="p-meta reveal">
+        <span class="chip">个人项目</span><span class="chip">交互与实现</span>
+        <span class="chip">Vite</span><span class="chip">原生 JS</span><span class="chip">静态部署</span>
+      </div>
+
+      <figure class="shot reveal" data-img="assets/spectrum.webp">
+        <img src="assets/spectrum.webp" width="1200" height="860" alt="SpectrumFog Web 探索器" loading="lazy">
+      </figure>
+      <p class="cap">左：可拖拽的覆盖热力图　·　右上：实时数值面板　·　右下：Pd / J-S 曲线随拖动更新</p>
+
+      <div class="notes reveal">
+        <div><b>交互模型</b><span>拖拽干扰机 → 热力图重绘 → 跟踪边界收缩 → 两条曲线上的标记点同步移动，一屏之内因果可见。</span></div>
+        <div><b>性能取舍</b><span>物理只在 Python 侧算一次，导成查表，前端只做插值 —— 所以拖动是顺的，不需要后端。</span></div>
+        <div><b>状态可读</b><span>Tracking / Lost 用一枚徽标表达，不让用户从曲线里推；数值统一三位有效数字。</span></div>
+        <div><b>空间利用</b><span>左图右数的不对称布局，把 2/3 宽度留给可视化。</span></div>
+      </div>
+      <blockquote class="quote reveal">好的交互不是加动效，是让因果在一屏之内闭合。</blockquote>
+    </div>
+  </section>
+
+  <!-- 05 pythia -->
+  <section class="project" id="pythia">
+    <div class="wrap">
+      <div class="p-head reveal">
+        <div>
+          <div class="eyebrow">05 — PYTHIA · 数据看板</div>
+          <h2>一组要被人「对账」的图表</h2>
+        </div>
+        <div class="tag">2026.10 – 至今</div>
+      </div>
+      <p class="p-sub reveal">每张图都要能回答：差多少、差在哪、可不可信。</p>
+      <div class="p-meta reveal">
+        <span class="chip">个人项目</span><span class="chip">图表与报告</span>
+        <span class="chip">matplotlib</span><span class="chip">GitHub Pages</span>
+      </div>
+
+      <div class="shots-2">
+        <figure class="shot reveal" data-img="assets/pythia-lb.webp">
+          <img src="assets/pythia-lb.webp" width="959" height="488" alt="模型排行榜" loading="lazy">
+        </figure>
+        <figure class="shot reveal" data-img="assets/pythia-cal.webp">
+          <img src="assets/pythia-cal.webp" width="1000" height="554" alt="校准曲线" loading="lazy">
+        </figure>
+      </div>
+      <p class="cap">左：排行榜（虚线 = 收盘价基准）　·　右：校准曲线（带误差棒）</p>
+
+      <div class="notes reveal">
+        <div><b>基准先行</b><span>所有条形图都有一条参考线，差值一眼可见；没有基准的图，读者只能看出「谁长谁短」。</span></div>
+        <div><b>直接标注</b><span>数值写在条尾，不用去 y 轴对格子；同一模型跨图同色，换图不用重新找。</span></div>
+        <div><b>误差可见</b><span>校准图带误差棒，结论里给 bootstrap 区间 —— 图负责让人判断这个差距是不是噪声。</span></div>
+        <div><b>可复现</b><span>图表由脚本生成，每周 CI 自动重跑并回填 README。</span></div>
+      </div>
+      <blockquote class="quote reveal">图表的任务不是好看，是让人一眼看出「差多少」，并且相信这个差。</blockquote>
+    </div>
+  </section>
+
+  <!-- more -->
+  <section class="project" id="more">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>另外三个项目</h2>
+        <p>偏工程的三个：智能体安全、agent 可观测性、移动端全栈。</p>
+      </div>
+      <div class="more">
+        <a class="card reveal" href="https://github.com/haohaohao-cell" target="_blank" rel="noopener">
+          <div class="idx">06</div>
+          <h3>鉴行 · AgentJudge</h3>
+          <p>智能体工具调用的实时审计与拦截。17 类红队场景，ASR 0%，良性任务完成率 94.1%。</p>
+          <div class="stack">Python · Docker · HMAC 审计链</div>
+        </a>
+        <a class="card reveal" href="https://github.com/haohaohao-cell/agent-silent-failure" target="_blank" rel="noopener">
+          <div class="idx">07</div>
+          <h3>agent-silent-failure</h3>
+          <p>agent 做错了，它自己知道吗？8 类故障注入 + 2×2 判定，补一个查询工具后人工介入率 9–10/10 → 0/10。</p>
+          <div class="stack">Python · smolagents · LangGraph</div>
+        </a>
+        <a class="card reveal" href="https://github.com/MottoYoung/PhotoFramer" target="_blank" rel="noopener">
+          <div class="idx">08</div>
+          <h3>PhotoFramer</h3>
+          <p>Android + Spring Boot 的摄影构图 App：Canvas 网格、比例裁剪、相框叠加与实时预览。</p>
+          <div class="stack">Android · Spring Boot · Redis</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section class="project" id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>关于</h2>
+        <p>做法和联系方式。</p>
+      </div>
+      <div class="about">
+        <ul class="reveal">
+          <li><span><b>层级：</b>一屏之内先看什么、后看什么 —— 用字号、留白和位置，而不是靠加粗解决。</span></li>
+          <li><span><b>状态：</b>空、加载、出错、超长文本 —— 这四种最容易被漏掉，也最容易被用户撞上。</span></li>
+          <li><span><b>一致：</b>同一类信息用同一套间距、圆角、图标语义；不一致的地方，用户会以为是 bug。</span></li>
+          <li><span><b>还原：</b>设计稿的间距和颜色落到代码里要能被复查 —— 所以我把尺寸写成变量，而不是散落在各处。</span></li>
+        </ul>
+        <div class="contact-card reveal">
+          <dl>
+            <div><dt>Email</dt><dd><a href="mailto:2024213444@bupt.cn">2024213444@bupt.cn</a></dd></div>
+            <div><dt>Phone</dt><dd>18603285851</dd></div>
+            <div><dt>GitHub</dt><dd><a href="https://github.com/haohaohao-cell" target="_blank" rel="noopener">github.com/haohaohao-cell</a></dd></div>
+            <div><dt>Gitee</dt><dd><a href="https://gitee.com/hao-renyu" target="_blank" rel="noopener">gitee.com/hao-renyu</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 郝仁昱 · 本页为静态站点，可直接部署到 GitHub Pages</span>
+    <span>北京邮电大学 · 物联网工程</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="查看大图">
+  <button class="close" id="lbClose" aria-label="关闭">×</button>
+  <img id="lbImg" alt="">
+</div>
+
+<script>
+(function(){
+  // nav border on scroll
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // reveal on scroll
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // lightbox
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+  document.querySelectorAll('.shot').forEach(function(fig){
+    fig.addEventListener('click', function(){
+      lbImg.src = fig.dataset.img;
+      lb.classList.add('on');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function close(){ lb.classList.remove('on'); document.body.style.overflow = ''; }
+  lb.addEventListener('click', close);
+  document.getElementById('lbClose').addEventListener('click', function(e){ e.stopPropagation(); close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+</body>
+</html>
+
+
